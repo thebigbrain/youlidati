@@ -1,0 +1,37 @@
+{
+  "name": "youlidati",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jasmine": "^2.8.6",
+    "@types/react": "^16.0.40",
+    "@types/react-dom": "^16.0.4",
+    "@types/react-router-dom": "^4.2.5",
+    "autoprefixer": "^8.1.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.16.3",
+    "node-sass": "^4.7.2",
+    "parcel-bundler": "^1.6.2",
+    "postcss-modules": "^1.1.0",
+    "request": "^2.85.0",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "fetch": "^1.1.0",
+    "js-sha256": "^0.9.0",
+    "qs": "^6.5.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
+  },
+  "scripts": {
+    "start": "parcel index.html -p 6789",
+    "test": "parcel test.html -p 6080",
+    "proxy": "node ./tools/proxy.js",
+    "build": "parcel build ./index.html --public-url ./ --out-dir build/release"
+  }
+}

@@ -1,0 +1,134 @@
+.score {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: url('../assets/score.png');
+  background-size: 100% 100%;
+  box-sizing: border-box;
+  padding: 30% 10% 15%;
+  text-align: center;
+  transition: top ease .32s;
+  > img {
+    width: 65%;
+  }
+  p {
+    margin: 0;
+  }
+}
+
+.score_number {
+  color: #532d1a;
+  padding: 5px;
+  > * {
+    position: relative;
+    display: inline-block;
+  }
+  > span:first-child {
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    font-weight: bold;
+  }
+  > span:last-child {
+    left: 10px;
+    font-size: 24px;
+  }
+}
+
+.marks {
+  position: relative;
+  // padding: 30px;
+  // padding-bottom: 25px;
+  padding: 0;
+  .marks_bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    animation: lighting 1s infinite;
+  }
+  img {
+    position: relative;
+    width: 140px;
+  }
+  img:last-child {
+    z-index: 99;
+  }
+}
+
+.time_used {
+  color: #532d1a;
+  padding-bottom: 1em;
+  > span:first-child {
+    margin-right: 30px;
+  }
+}
+
+.ops {
+  display: block;
+  z-index: 99;
+  > div {
+    background-image: url('../assets/ranking.png');
+    background-size: 100% 100%;
+    &:active {
+      background-image: url('../assets/ranking_down.png');
+    }
+  }
+  > * {
+    display: inline-block;
+    width: 110px;
+    height: 33px;
+    margin: 5px 10px;
+  }
+}
+
+:global(.flex-spacer) {
+  flex-grow: 1;
+}
+
+:global(.glory-info) {
+  // margin-bottom: 10px;
+  color: #532d1a;
+  p > i {
+    font-size: 1.2em;
+    margin-right: .3em;
+  }
+}
+
+@keyframes lighting {
+  from {
+    opacity: .3;
+    transform: scale(1);
+  }
+  to {
+    opacity: .85;
+    transform: scale(4);
+  }
+}
+
+.team_ranking {
+  text-align: center;
+  a {
+    padding: 10px;
+    color: #532d1a;
+    text-decoration: underline;
+  }
+}
+
+// .top_team {
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   background-image: url('../assets/rect.png');
+//   background-size: 100% 100%;
+//   top: 100%;
+//   left: 0;
+//   z-index: 999;
+// }

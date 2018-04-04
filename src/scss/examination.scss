@@ -1,0 +1,58 @@
+.loading {
+  text-align: center;
+  padding: 15px;
+  font-size: 18px;
+  color: #532d1a;
+}
+
+.examination {
+  // position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-size: 13px;
+  overflow: auto;
+  max-height: 70%;
+  > h2 {
+    letter-spacing: .5em;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  > span {
+    font-size: 10px;
+    // padding-left: 1em;
+  }
+}
+
+.title {
+  height: 20px;
+  padding-top: 10px;
+  margin: auto;
+}
+
+.content {
+  line-height: 1.5;
+  word-break: break-all;
+  margin: 5px 0;
+  font-weight: bold;
+  margin-bottom: 15px;
+  &::first-letter {
+    margin-left: 2em;
+  }
+  span {
+    font-weight: normal;
+  }
+}
+
+.answers {
+  flex-grow: 1;
+  margin: 0;
+  padding-left: 3.3em;
+  line-height: 2;
+  > * {
+    list-style-type: upper-alpha;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+}
