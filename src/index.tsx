@@ -12,7 +12,18 @@ import { login } from './api';
 //   </Router>
 // ), document.getElementById('app'));
 
-let code = window.location.search.split('?')[1].split('=')[1].split('&')[0];
+function reload() {
+  window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfd37b894bded6bf8&redirect_uri=http%3A%2F%2Fxxyl.zbfuhua.com%2F&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect';
+}
+
+let code = '';
+try {
+  code = window.location.search.split('?')[1].split('=')[1].split('&')[0];
+} catch(err) {
+  console.log(err);
+  reload();
+};
+
 login({code}).then((res) => {
   if (res.data) {
     let cs = res.data.client_session;
@@ -24,7 +35,7 @@ login({code}).then((res) => {
     ), document.getElementById('app'));
   } else {
     // window.alert(res.code);
-    window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfd37b894bded6bf8&redirect_uri=http%3A%2F%2Fxxyl.zbfuhua.com%2F&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect';
+    reload();
   }
 }).catch(err => {
   window.alert(JSON.stringify(err || '登录失败'));
