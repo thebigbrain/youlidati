@@ -13,6 +13,10 @@
 .avatar {
   width: 80px;
   height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+  max-width: 80px;
+  max-height: 80px;
   border-radius: 100%;
   letter-spacing: 10px;
   text-align: center;

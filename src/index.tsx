@@ -4,13 +4,9 @@ import { HashRouter as Router } from 'react-router-dom';
 
 import App from './components/app';
 
-import { login } from './api';
+import { login, wxconfig } from './api';
 
-// ReatDOM.render((
-//   <Router>
-//     <App/>
-//   </Router>
-// ), document.getElementById('app'));
+declare var window: any;
 
 function reload() {
   window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfd37b894bded6bf8&redirect_uri=http%3A%2F%2Fxxyl.zbfuhua.com%2F&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect';
@@ -33,6 +29,7 @@ login({code}).then((res) => {
         <App/>
       </Router>
     ), document.getElementById('app'));
+    wxConfig();
   } else {
     // window.alert(res.code);
     reload();
@@ -40,3 +37,16 @@ login({code}).then((res) => {
 }).catch(err => {
   window.alert(JSON.stringify(err || '登录失败'));
 });
+
+function wxConfig() {
+  wxconfig().then((res) => {
+    window.wx.config(Object.assign({
+      debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+      appId: '', // 必填，公众号的唯一标识
+      timestamp: '', // 必填，生成签名的时间戳
+      nonceStr: '', // 必填，生成签名的随机串
+      signature: '',// 必填，签名
+      jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ'] // 必填，需要使用的JS接口列表
+    }, res.data || {}));
+  });
+}

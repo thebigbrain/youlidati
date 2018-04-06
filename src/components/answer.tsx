@@ -54,12 +54,14 @@ export default class Answer extends React.Component<{}, AnswerState> {
   private loopHandle: any;
   private selected: Array<number>;
   private next_clicked: boolean;
+  private hasNext: boolean;
 
   constructor(props) {
     super(props);
 
     this.selected = [];
     let timeLeft: number = 15 * 60;
+    this.hasNext = true;
     this.state = {
       timeLeft,
       started: false,
@@ -201,6 +203,9 @@ export default class Answer extends React.Component<{}, AnswerState> {
     let { history, match }: any = this.props;
     let id = parseInt(match.params.id);
     id = id + 1;
+    if (!this.hasNext) {
+      return history.replace(`/score`);
+    }
     if (id > this.state.total + 1) {
       this.next_clicked = false;
       history.replace(`/score`);
@@ -210,11 +215,14 @@ export default class Answer extends React.Component<{}, AnswerState> {
         if (res.data && res.data.question) {
           let question = this.fixQuestion(res.data.question);
           this.setState({question});
-          history.replace(`/answer/${id}`);
-        } else if(res.data && res.data.result) {
-          history.replace(`/score`);
+          if (res.data.type == 1) {
+            // history.replace(`/score`);
+            this.hasNext = false;
+          } else {
+            history.replace(`/answer/${id}`);
+          }
         } else {
-          window.alert(res.code);
+          // window.alert(res.code);
           this.jump2next();
         }
       }).catch(err => {

@@ -2,6 +2,10 @@ import http from './http';
 
 declare var window:any;
 
+export function wxconfig() {
+  return http.get('');
+}
+
 export function login(data = {}) {
   return http.post('/api/accounts/login', data);
 }
