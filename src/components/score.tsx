@@ -12,7 +12,7 @@ const shareImage = require('../assets/share.png');
 
 let teamListCache = [];
 
-const gloryScoreNumber = 10;
+const gloryScoreNumber = 60;
 
 interface ScoreState {
   score: number,
@@ -53,7 +53,7 @@ export default class Score extends React.Component<{}, ScoreState> {
         elapsed: convertTime(parseInt(result.cost_time)),
         rank: result.sort,
         total: result.team_num,
-        team: '浙江大学'
+        team: sess.corp_name
       });
     });
   }
