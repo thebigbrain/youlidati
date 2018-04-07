@@ -8,6 +8,8 @@ import { login, wxconfig } from './api';
 
 declare var window: any;
 
+const shareImgUrl = require('./assets/youlidati_share.jpg');
+
 function reload() {
   window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxfd37b894bded6bf8&redirect_uri=http%3A%2F%2Fxxyl.zbfuhua.com%2F&response_type=code&scope=snsapi_userinfo&state=#wechat_redirect';
 }
@@ -47,6 +49,31 @@ function wxConfig() {
       nonceStr: '', // 必填，生成签名的随机串
       signature: '',// 必填，签名
       jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ'] // 必填，需要使用的JS接口列表
-    }, res.data || {}));
+    }, res.data.sign, {
+      nonceStr: res.data.sign.noncestr
+    }));
+    window.wx.ready(() => {
+      init_share();
+    });
   });
+}
+
+function init_share() {
+  let config = {
+    title: '纪念马克思诞辰200周年，测测你对他的了解有几分！', // 分享标题
+    desc: '信仰的味道有点甜', // 分享描述
+    link: 'http://xxyl.zbfuhua.com/share', // 分享链接
+    imgUrl: window.location.origin + '/' + shareImgUrl, // 分享图标
+    success: function () {
+    // 用户确认分享后执行的回调函数
+    console.log('分享成功')
+    },
+    cancel: function () {
+    // 用户取消分享后执行的回调函数
+    console.log('分享取消')
+    }
+  };
+  window.wx.onMenuShareTimeline(config);
+  window.wx.onMenuShareAppMessage(config);
+  window.wx.onMenuShareQQ(config);
 }

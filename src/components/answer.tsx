@@ -181,7 +181,12 @@ export default class Answer extends React.Component<{}, AnswerState> {
         let result = res.data.question.result;
         this.setState({ answered, result });
         setTimeout(() => {
-          this.jump2next();
+          if (!this.hasNext) {
+            let { history }: any = this.props;
+            return history.replace(`/score`);
+          } else {
+            this.jump2next();
+          }
         }, 1000);
       } else {
         window.alert(res.data);
@@ -203,10 +208,7 @@ export default class Answer extends React.Component<{}, AnswerState> {
     let { history, match }: any = this.props;
     let id = parseInt(match.params.id);
     id = id + 1;
-    if (!this.hasNext) {
-      return history.replace(`/score`);
-    }
-    if (id > this.state.total + 1) {
+    if (id > this.state.total) {
       this.next_clicked = false;
       history.replace(`/score`);
     } else {
@@ -216,7 +218,9 @@ export default class Answer extends React.Component<{}, AnswerState> {
           let question = this.fixQuestion(res.data.question);
           this.setState({question});
           if (res.data.type == 1) {
-            // history.replace(`/score`);
+            if (!this.hasNext) {
+              history.replace(`/score`);
+            }
             this.hasNext = false;
           } else {
             history.replace(`/answer/${id}`);

@@ -3,7 +3,7 @@ import http from './http';
 declare var window:any;
 
 export function wxconfig() {
-  return http.get('');
+  return http.get('/api/weixin/getSign');
 }
 
 export function login(data = {}) {
